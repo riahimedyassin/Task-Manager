@@ -4,7 +4,7 @@ const pageRoutes=require("./routes/pageRoutes")
 //ENV GETTER
 require('dotenv').config();
 const port = process.env.PORT
-const connectDB= require("./database/connects");
+const connectDB= require("./config/connects");
 const errorHandler = require("./middleware/errorHandler");
 
 app.use(express.static("./public"))
