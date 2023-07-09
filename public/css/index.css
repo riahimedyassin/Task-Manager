@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
 
+:root {
+    --background : #000619 ;
+    --primay:  #ffcc12 ;
+    --secondary:#0e3d01 ;
+    --shadow :  #fee3814c;
+    
+}
 
 * {
     margin: 0;
@@ -8,15 +15,21 @@
     box-sizing: border-box;    
     font-family: 'Poppins', sans-serif;
 }
-button {
+body {
+    background-image: url(../src/bg.png);
+    background-size: cover;
+    color: white;
+}
+button , img{
     cursor: pointer;
 }
-.container,.taskContainer,.render  {
+
+.container,.taskContainer,.render,.task  {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.render {
+.render ,.task{
     flex-direction: column;
 }
 .container {
@@ -26,11 +39,18 @@ button {
 .container input {
     width: 600px;
     height: 50px;
+    border-radius: 8px;
+    border: none;
+
+}
+.container input:focus {
+    outline: none;  
+    padding: 10px;
 }
 .container button {
     width: 100px;
     height: 50px;
-    background-color: green;
+    /* background-color: green; */
     color: white;
     border: none;
 }
@@ -55,11 +75,68 @@ form h1 {
 }
 .taskContainer {
     width: 800px;
-    background-color: #eee;
+    background-image: url("../src/taskBg.png");
+    background-size: cover;
     height: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     margin: 16px;
+    border-radius: 16px;
+    transition: 0.2s;
+}
+.taskContainer:hover {
+    box-shadow: var(--shadow) 0px 4px 12px;
+    transform: scale(1.1);
+}
+.task {
+    border: 2px solid black;
+    width: 600px;
+    border-radius: 12px;
+    margin: 16px;
+    height: 150px;
+    padding: 36px;
+    background-color: var(--primay);
+    color: var(--background);
+}
+.div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+}
+#checkDone {
+    width: 20px;
+    height: 20px;
+}
+.edit,.backHome {
+    margin: 20px;
+    border-radius: 8px;
+}
+.edit {
+    background-color: var(--primay);
+    color:#000619
+}
+.backHome {
+    background-color: var(--secondary);
+}
+#title {
+    width: 80%;
+    height: 30px;
+    margin: 10px;
+    border: none;
+}
+.containerTask {
+    margin-top: 200px;
+
+}
+.divTitle {
+    width: 100%;
+}
+#addTask {
+    background-color: var(--secondary);
+    border-radius: 0px 8px 8px 0 ;
+    margin-left: -10px;
+    
 }

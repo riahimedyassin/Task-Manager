@@ -1,28 +1,29 @@
 const constants= require("../constants.js")
 
 const errorHandler = (err,req,res,next) => {
-    const status = res.statusCode || 500;
+    const status = err.status || 500;
     switch(status) {
         case constants.NOT_FOUND : {
-            res.json({title:"NOT_FOUND",message:err.message,stackTrace : status})
-            break;
+            return res.status(404).render("notFound.ejs")
         };
         case constants.FORBIDDEN : {
-            res.json({title:"FORBIDDEN",message:err.message,stackTrace : status})
-            break;
+            return res.status(constants.FORBIDDEN).json({title:"FORBIDDEN",message:err,stackTrace : status})
+        
         }
         case constants.UNAUTHORIZED : {
-            res.json({title:"UNAUTHORIZED",message:err.message,stackTrace : status})
-            break;
+            return res.status(constants.UNAUTHORIZED).json({title:"UNAUTHORIZED",message:err,stackTrace : status})
+        
         }
         case constants.VALIDATION_ERROR : {
-            res.json({title:"VALIDATION_ERROR",message:err.message,stackTrace : status})
-            break;
+            return res.status(constants.VALIDATION_ERROR).json({title:"VALIDATION_ERROR",message:err,stackTrace : status})
+     
         }
         case constants.SERVER : {
-            res.json({title:"SERVER",message:err.message,stackTrace : status})
-            break;
+            return res.status(constants.SERVER).json({title:"SERVER",message:err,stackTrace : status})
+       
         };
+        default : return res.status(200).json({title:"OK!",message:err,stackTrace : status})
     }
+ 
 }
 module.exports=errorHandler

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container containerTask">
+        
+        <div class="render ">
+            <h1>Edit Task</h1>
+            <div class="task">
+                <div class="divTitle">
+                    <label for="title">Title : </label>
+                    <input type="text" name="title" id="title" >
+                </div>
+                <div class="div">
+                    <label for="checkDone">Complited</label>
+                    <input type="checkbox" name="checkDone" id="checkDone">
+                </div>
+                <h4 id="taskID">ID</h4>
+            </div>
+            <div class="alertField"></div>
+            <button class="edit">Edit</button>
+            <a href="./index.html"><button class="backHome">Back Home</button></a>
+
+            <!-- Rendered task here -->
+        </div>
+
+    </div>
+
+
+</body>
+<script src="./js/editTask.js" type="module"></script>
+
+</html>
