@@ -6,11 +6,16 @@ require('dotenv').config();
 const port = process.env.PORT
 const connectDB= require("./config/connects");
 const errorHandler = require("./middleware/errorHandler");
+const notFound = require("./middleware/notFoundHandler");
 
 app.use(express.static("./public"))
 app.use(express.json())
-app.use("/api/tasks/v1",pageRoutes);
 
+
+//ROUTE
+app.use("/api/tasks/v1",pageRoutes);
+app.use(notFound)
+app.use(errorHandler)
 const start =async () => {
     try {
         await connectDB(process.env.connectionString);
@@ -20,8 +25,8 @@ const start =async () => {
         console.log(err)
     }
 }
-app.use(errorHandler)
 start()
+
 
 
 
