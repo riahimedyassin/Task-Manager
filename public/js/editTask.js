@@ -1,13 +1,12 @@
 const title = document.querySelector("#title")
-const taskID = document.querySelector("#taskID")
 const checkDone = document.querySelector("#checkDone")
-const render = document.querySelector(".render")
 const params = window.location.search
 const TaskID = new URLSearchParams(params).get('id')
 const editButton = document.querySelector(".edit")
 const alertField = document.querySelector(".alertField")
+const labelRender = document.querySelector(".labelRender")
 
-import API_URL from "./constants.js"
+import {API_URL} from "./constants.js"
 
 
 const emitMessage= (message) => {
@@ -16,10 +15,14 @@ const emitMessage= (message) => {
 }
 
 const renderTask = (task) => {
-    const {name,_id,done} = task;
+    const {name,done,label} = task;
     title.value=name;
-    taskID.innerHTML=_id;
     checkDone.checked=done
+    labelRender.insertAdjacentHTML("afterbegin","<h4>Label : </h4>")
+    const labelHolder = document.createElement("div")
+    labelHolder.classList.add("label")
+    labelHolder.innerHTML=label
+    labelRender.appendChild(labelHolder);
 }
 
 

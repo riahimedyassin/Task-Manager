@@ -1,13 +1,14 @@
 
-import API_URL from "./constants.js"
+import {API_URL,LABEL_URL} from "./constants.js"
+import { addLabel, fetchLabel } from "./label.js"
+const labelRender= document.querySelector(".labels")
 const deleteTask = async (id) => {
 
     try {
         const data = await fetch(`${API_URL}/${id}`, {
             method:"DELETE"
         })
-        const dataJSON=await data.json()
-        console.log(dataJSON)
+        console.log("Deleted Successfully")
     } catch (error) {
         console.log(error)
     }
@@ -18,13 +19,13 @@ let alertField = document.querySelector("#alertField")
 const appendData = (arr) => {
     let render = document.querySelector(".render")
     render.innerHTML=""
-    arr.forEach(task => {
+    if(arr.length!==0) {arr.reverse().forEach(task => {
         let holder = document.createElement("div")
         holder.setAttribute("id",task._id)
         holder.classList.add("taskContainer");
         let title = document.createElement("h2")
         title.innerHTML=task.name
-        task.done ? title.style.color="red" : title.style.color="green"
+        task.done ? holder.classList.add("done") : holder.classList.remove("done")
         holder.appendChild(title);
         let iconContainer = document.createElement("div")
         let deleteImg= document.createElement("img")
@@ -44,7 +45,10 @@ const appendData = (arr) => {
         iconContainer.appendChild(editImg)
         holder.appendChild(iconContainer);
         render.appendChild(holder)
-    })
+    })}
+    else {
+        render.innerHTML="No Available Tasks"
+    }
 }
 
 //PREVENT THE DEFAULT BEHAVIOUR OF THE FORM SUBMETTING
@@ -54,7 +58,7 @@ document.formDom.addEventListener("submit",(e) => e.preventDefault())
 const createTask=async () => {
     const input = document.querySelector("#name")
     const name = input.value
-    
+    const label = document.querySelector("#label").value
     if(!name){
         alertField.innerHTML="Please enter a valid Task"
         setTimeout(() => alertField.innerHTML="",3000)
@@ -70,13 +74,16 @@ const createTask=async () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name:name,done:false})
+        body: JSON.stringify({name:name,done:false,label})
     })
-    .then(res=>{
+    .then(()=>{
         input.value=""
         fetchData()
     })
     .catch(err=>console.log(err)) 
+    if(label) {
+        addLabel(label)
+    }
 
     
 }
@@ -91,10 +98,32 @@ const fetchData= async () => {
         })
         const dataJSON=await data.json()
         appendData(dataJSON)
+        return dataJSON
     } catch (error) {
         console.log(error)
+        return null
+    }
+}
+const applyFilter=async (label) => {
+    let render = document.querySelector(".render")
+    const data = await fetchData()
+    const filtred = data.filter(el => el.label===label)
+    filtred.length ===0 ? render.innerHTML="No Elements With Such a Label" : appendData(filtred)
+}
+
+
+
+
+
+document.querySelector("#addTask").addEventListener("click",createTask)
+window.onload=async () => {
+    try {
+        fetchData()
+        fetchLabel()
+    }
+    catch(err) {
+        console.log(err)
     }
 }
 
-document.querySelector("#addTask").addEventListener("click",createTask)
-window.onload=fetchData
+export {applyFilter,fetchData,deleteTask}
