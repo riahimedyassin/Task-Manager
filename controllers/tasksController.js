@@ -35,7 +35,7 @@ const deleteTask = asyncWrapper(async (req, res) => {
     const { id } = req.params;
     const task = await Task.findOneAndDelete({ _id: id })
     if (task) {
-        res.status(201).json({ message: "Deleted Succesfully" })
+        res.status(204).json({ message: "Deleted Succesfully" })
     }
     else {
         res.status(404)

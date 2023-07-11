@@ -3,7 +3,7 @@
 
 :root {
     --background : #000619 ;
-    --primay:  #ffcc12 ;
+    --primay:  #eabc14 ;
     --secondary:#0e3d01 ;
     --shadow :  #fee3814c;
     
@@ -24,7 +24,7 @@ button , img{
     cursor: pointer;
 }
 
-.container,.taskContainer,.render,.task  {
+.container,.taskContainer,.render,.task ,.labels, .label,.holder,.flex {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,11 +41,11 @@ button , img{
     height: 50px;
     border-radius: 8px;
     border: none;
+    padding: 10px;
 
 }
 .container input:focus {
     outline: none;  
-    padding: 10px;
 }
 .container button {
     width: 100px;
@@ -77,7 +77,7 @@ form h1 {
     width: 800px;
     background-image: url("../src/taskBg.png");
     background-size: cover;
-    height: 150px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -139,4 +139,44 @@ form h1 {
     border-radius: 0px 8px 8px 0 ;
     margin-left: -10px;
     
+}
+#label{
+    width:120px;
+    border-radius: 0 ;
+    margin-left: -10px;
+    border-left: 1px solid black ;
+}
+.label {
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #bd9400;
+    color: white;
+    margin: 16px;
+    cursor: pointer;   
+    transition: 0.2s;
+}
+.labelRed {
+    background-color: rgba(255, 55, 0, 0.391);
+}
+.label:hover {
+    background-color: #ebba0c;
+}
+.labelRed:hover {
+    background-color: rgba(255, 55, 0, 0.651);
+}
+.holderLabel {
+    width: 600px;
+    height: 100px;
+    background-color: red;
+}
+.done {
+    filter: grayscale(0.8);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    transition: 0.2s;
+
+}
+.done:hover {
+    filter: grayscale(0.5);
 }

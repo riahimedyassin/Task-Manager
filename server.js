@@ -7,13 +7,15 @@ const port = process.env.PORT
 const connectDB= require("./config/connects");
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/notFoundHandler");
-
+const labelRoutes = require("./routes/labelRoutes")
 app.use(express.static("./public"))
 app.use(express.json())
 
 
 //ROUTE
 app.use("/api/tasks/v1",pageRoutes);
+app.use("/api/label/v1",labelRoutes)
+
 app.use(notFound)
 app.use(errorHandler)
 const start =async () => {
